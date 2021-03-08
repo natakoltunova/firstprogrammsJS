@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <title>Личный сайт студента GeekBrains│ Угадайка</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <script>
+      function hideContent(id) {
+        document.getElementById(id).style.display = 'none'
+      }
+
+      function showPassword(text) {
+        document.getElementById('urpassword').innerHTML = text
+      }
+
+      function generatePassword() {
+        let letters = [
+          'a',
+          'b',
+          'c',
+          'd',
+          'e',
+          'f',
+          'g',
+          'h',
+          'i',
+          'j',
+          'k',
+          'l',
+          'm',
+          'n',
+          'o',
+          'p',
+          'q',
+          'r',
+          's',
+          't',
+          'u',
+          'v',
+          'w',
+          'x',
+          'y',
+          'z',
+          'A',
+          'B',
+          'C',
+          'D',
+          'E',
+          'F',
+          'G',
+          'H',
+          'I',
+          'J',
+          'K',
+          'L',
+          'M',
+          'N',
+          'O',
+          'P',
+          'Q',
+          'R',
+          'S',
+          'T',
+          'U',
+          'V',
+          'W',
+          'X',
+          'Y',
+          'Z',
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          '~',
+          '!',
+          '@',
+          '#',
+          '$',
+          '%',
+          '^',
+          '&',
+          '*',
+          '+',
+          ';',
+          ':',
+          '<',
+          '>',
+          '/',
+        ]
+        let pass = ''
+        let userNumber = parseInt(document.getElementById('number').value)
+        for (let i = 0; i < userNumber; i++) {
+          let n = Math.round(Math.random() * 74)
+          pass += letters[n]
+        }
+        hideContent('content')
+        hideContent('clickFunc')
+
+        showPassword(
+          `<p style="font-size:26px">Спаси и сохрани свой пароль:&nbsp;&nbsp; <strong style="color:rgb(68, 22, 153)">${pass}</strong></p><br /><a class="box_buttons-item column" onclick="window.location.reload(true)">
+            Ещё пароль!
+          </a>`
+        )
+        hideContent('number')
+      }
+    </script>
+  </head>
+
+  <body>
+    <div class="container">
+      <header>
+        <a class="header_link" href="index.html">Главная</a>
+        <a class="header_link" href="puzzle.html">Загадки</a>
+        <a class="header_link" href="guess2.html">Угадайка</a>
+        <a class="header_link" href="#">Генератор пароля</a>
+      </header>
+
+      <h1>Генератор пароля</h1>
+
+      <section class="box" id="section">
+        <p class="box_text" id="content">
+          Укажите количество символов для вашего пароля
+        </p>
+        <p class="box_text" id="urpassword"></p>
+        <input type="text" id="number" />
+        <br />
+        <a
+          class="box_buttons-item"
+          id="clickFunc"
+          href="#"
+          onClick="generatePassword()"
+          >Сгенерировать пароль</a
+        >
+      </section>
+
+      <footer>Copyright &copy; Vasilisa Pupkina</footer>
+    </div>
+  </body>
+</html>

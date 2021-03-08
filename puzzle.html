@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <title>Личный сайт студента GeekBrains │ Игра в загадки</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <script type="text/javascript">
+      let score = 0
+
+      function checkAnswer(inputId, answers) {
+        let userAnswer = document.getElementById(inputId).value.toLowerCase()
+        for (let i = 0; i < answers.length; i++) {
+          if (userAnswer == answers[i]) {
+            score++
+            break
+          }
+        }
+      }
+
+      function write(text) {
+        document.getElementById('info').innerHTML = text
+      }
+
+      function hideButtons(id) {
+        document.getElementById(id).style.display = 'none'
+      }
+
+      function checkAnswers() {
+        checkAnswer('userAnswer1', ['хрен'])
+        checkAnswer('userAnswer2', ['пух'])
+        checkAnswer('userAnswer3', ['обед', 'ужин'])
+        checkAnswer('userAnswer4', ['пустой', 'пустая'])
+
+        function scoreChoice() {
+          if (score == 1) {
+            return ' загадку'
+          } else if (score == 2 || score == 3 || score == 4) {
+            return ' загадки'
+          } else {
+            return ' загадок'
+          }
+        }
+
+        document.getElementById(
+          'scores'
+        ).innerHTML = `<p style="font-size:26px">Вы отгадали ${score} ${scoreChoice()}</p><br /><a class="box_buttons-item column" onclick="window.location.reload(true)">
+            Попробовать ещё!
+          </a>`
+        hideButtons('answer')
+      }
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <a class="header_link" href="index.html">Главная</a>
+        <a class="header_link" href="#">Загадки</a>
+        <a class="header_link" href="guess2.html">Угадайка</a>
+        <a class="header_link" href="generator.html">Генератор пароля</a>
+      </header>
+
+      <h1>Игра в загадки</h1>
+
+      <form class="box">
+        <p class="box_puzzle">Какое растение все знает?</p>
+        <input type="text" id="userAnswer1" />
+
+        <p class="box_puzzle">
+          С земли и ребенок поднимет, а через забор и силач не перекинет.
+        </p>
+        <input type="text" id="userAnswer2" />
+
+        <p class="box_puzzle">Что нельзя съесть на завтрак?</p>
+        <input type="text" id="userAnswer3" />
+
+        <p class="box_puzzle">Из какой посуды невозможно поесть?</p>
+        <input type="text" id="userAnswer4" />
+
+        <br />
+        <div id="scores"></div>
+        <div class="box_buttons" id="answer">
+          <a class="box_buttons-item" href="#" onClick="checkAnswers()"
+            >Ответить</a
+          >
+          <button class="box_buttons-item" type="reset">Очистить</button>
+        </div>
+      </form>
+      <footer>Copyright &copy; Vasilisa Pupkina</footer>
+    </div>
+  </body>
+</html>

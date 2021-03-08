@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <title>Личный сайт студента GeekBrains│ Угадайка</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <script type="text/javascript">
+      let answer = parseInt(Math.random() * 100)
+      let playerNumber = 'первый игрок'
+
+      function readInt() {
+        return parseInt(document.getElementById('userAnswer').value)
+      }
+
+      function write(text) {
+        document.getElementById('info').innerHTML = text
+      }
+
+      function hide(id) {
+        document.getElementById(id).style.display = 'none'
+      }
+
+      function showButton(id) {
+        document.getElementById(id).style.display = 'block'
+      }
+
+      function guess() {
+        let userAnswer = readInt()
+
+        if (isNaN(userAnswer)) {
+          write('Введите число от 0 до 100!')
+        } else if (userAnswer == answer) {
+          write(
+            `<strong>Поздравляю, вы угадали!<br>Победил ${playerNumber}!</strong><br /><br /><br /><a class="box_buttons-item" onclick="window.location.reload(true)">Играть снова!</a>`
+          )
+          hide('button')
+          hide('userAnswer')
+          hide('buttonContinue')
+        } else if (userAnswer > answer) {
+          changePlayer()
+          hide('button')
+          write(
+            `Вы ввели слишком большое число. Теперь ходит <strong>${playerNumber}</strong>`
+          )
+          showButton('buttonContinue')
+        } else if (userAnswer < answer) {
+          changePlayer()
+          hide('button')
+          write(
+            `Вы ввели слишком маленькое число. Теперь ходит <strong>${playerNumber}</strong>`
+          )
+          showButton('buttonContinue')
+        }
+
+        function changePlayer() {
+          if (playerNumber == 'первый игрок') playerNumber = 'второй игрок'
+          else playerNumber = 'первый игрок'
+        }
+      }
+    </script>
+  </head>
+
+  <body>
+    <div class="container">
+      <header>
+        <a class="header_link" href="index.html">Главная</a>
+        <a class="header_link" href="puzzle.html">Загадки</a>
+        <a class="header_link" href="#">Угадайка</a>
+        <a class="header_link" href="generator.html">Генератор пароля</a>
+      </header>
+
+      <h1>Игра угадайка</h1>
+
+      <section class="box">
+        <p class="box_text" id="info">
+          Игра предназначена для двух игроков. Угадывайте число от 0 до 100 по
+          очереди до победы одного из игроков.
+          <br />
+          На первый-второй рассчитайсь!
+          <br />
+          <strong>Первый игрок</strong>, введите Ваше число:
+        </p>
+        <input type="text" id="userAnswer" />
+        <br />
+        <a class="box_buttons-item" href="#" onClick="guess()" id="button"
+          >Начать</a
+        >
+        <a
+          class="box_buttons-item hide-button"
+          href="#"
+          onClick="guess()"
+          id="buttonContinue"
+          >Угадать</a
+        >
+      </section>
+
+      <footer>Copyright &copy; Vasilisa Pupkina</footer>
+    </div>
+  </body>
+</html>
